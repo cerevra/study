@@ -2,9 +2,10 @@
 
 using namespace std;
 
+template <class T>
 class BinaryFinder{
 public:
-    int binarySearch(int value, int* arr, int size){
+    int binarySearch(T value, T* arr, int size){
 
         m_value = value;
         m_arr   = arr;
@@ -27,8 +28,8 @@ private:
             return binarySearch(startIdx  , midIdx - 1);
     }
 
-    int  m_value;
-    int* m_arr;
+    T  m_value;
+    T* m_arr;
 };
 
 int main()
@@ -47,7 +48,7 @@ int main()
     cout << "Enter value to find" << endl;
     cin >> valToFind;
 
-    BinaryFinder bf;
+    BinaryFinder<int> bf;
     cout << bf.binarySearch(valToFind, arr, size) << endl;
 
     return 0;
