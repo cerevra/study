@@ -5,6 +5,4 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
-HEADERS += \
-    countNotNullBits.h
-
+INCLUDEPATH += ../countNotNullBits
