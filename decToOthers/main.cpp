@@ -12,7 +12,7 @@ string decToOther(int val, int base){
     string result;
 
     int baseBits    = countNotNulls(base - 1);
-    int resultSize  = sizeof(int)*(8);
+    int resultSize  = sizeof(int)*8.0/baseBits + 0.9;
     int modifedBase = base - 1;
 
     switch (base) {
