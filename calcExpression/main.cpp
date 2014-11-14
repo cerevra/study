@@ -30,10 +30,14 @@ public:
                 closeBrackets();
             }
             else if (priorityFunc(c) >= -1){
-                if (prev == '(' || pos == 0)
-                    m_operand.push(0);
+                if (prev == '(' || pos == 0  ){
+                    if(c == '-' || c   == '+')
+                        m_operand.push(0);
+                    else
+                        throw string("Wrong func order");
+                }
 
-                while (canPop(c))
+            while (canPop(c))
                     popFunc();
 
                 m_function.push(c);
@@ -154,8 +158,12 @@ int main()
                 cout << "Uncorrect expression" << endl;
             continue;
         }
+        catch (string s){
+            cout << s << endl;
+            continue;
+        }
         catch (...){
-            cout << "Enexpected error" << endl;
+            cout << "Unexpected error" << endl;
             continue;
         }
 
