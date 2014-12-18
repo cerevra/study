@@ -3,7 +3,10 @@
 #include "balancer.h"
 
 Balancer::Balancer()
-    : m_allWeight(0)
+    : m_allWeight(0    )
+    , m_balance  (false)
+    , m_canGet100(false)
+    , m_sum      (0    )
 {
 }
 
@@ -16,15 +19,17 @@ std::string Balancer::calc()
 {
     std::string result;
 
-    if (balance(0)){
-        for (unsigned int i = 0; i < m_buf.size(); ++i){
-            result.append(std::to_string(m_buf[i]));
+    balance(0);
+
+    if (m_balance){
+        for (unsigned int i = 0; i < m_solution.size(); ++i){
+            result.append(std::to_string(m_solution[i]));
             result.append(" ");
         }
         result.append("- ");
 
         for (unsigned int i = 0; i < m_data.size(); ++i){
-            if (find(m_buf.begin(), m_buf.end(), m_data[i]) == m_buf.end()){
+            if (find(m_solution.begin(), m_solution.end(), m_data[i]) == m_solution.end()){
                 result.append(std::to_string(m_data[i]));
                 result.append(" ");
             }
@@ -32,6 +37,13 @@ std::string Balancer::calc()
     }
     else
         result = "No solution";
+
+    result.append("\n");
+
+    if (m_canGet100)
+        result.append("yes");
+    else
+        result.append("no");
 
     return result;
 }
@@ -45,15 +57,22 @@ bool Balancer::check(){
     return sum*2 == m_allWeight;
 }
 
-bool Balancer::balance(unsigned int idx){
+void Balancer::balance(unsigned int idx){
     for (unsigned int i = idx; i < m_data.size(); ++i){
         m_buf.push_back(m_data[i]);
 
-        if (check() || balance(i+1))
-            return true;
+        if (!m_balance && check()){
+            m_balance  = true;
+            m_solution = m_buf;
+        }
+
+        m_sum += m_data[i];
+        if (m_sum == 100)
+            m_canGet100 = true;
+
+        balance(i+1);
 
         m_buf.pop_back();
+        m_sum -= m_data[i];
     }
-
-    return false;
 }

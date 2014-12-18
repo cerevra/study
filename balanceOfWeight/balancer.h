@@ -15,13 +15,16 @@ public:
 
 private:
     bool check  ();
-    bool balance(unsigned int idx);
-
-    Weights m_data;
-    unsigned int m_allWeight;
+    void balance(unsigned int idx);
 
     Weights m_buf;
+    Weights m_data;
+    Weights m_solution;
+    unsigned int m_allWeight;
 
+    bool m_balance;
+    bool m_canGet100;
+    unsigned int m_sum;
 };
 
 #endif // BALANCER_H

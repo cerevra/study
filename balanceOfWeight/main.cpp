@@ -17,7 +17,7 @@ int main()
             balance.push_back(x);
         }
 
-        cout << balance.calc().data() << endl;
+        cout << balance.calc() << endl;
     }
 
     return 0;
