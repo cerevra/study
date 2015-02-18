@@ -3,6 +3,8 @@
 
 #include <QTextStream>
 
+#include "array.h"
+
 class CLI
 {
 public:
@@ -12,9 +14,11 @@ public:
     void run();
 
 private:
-    QString parseArray ();
-    QString parseString();
-    void    printMsg   (const QString& msg);
+    void         processArray ();
+    void         processString();
+
+    QTextStream& printMsg(const QString& msg);
+    void         print   (const Array*   arr);
 
     static const QString m_illformedInput;
 

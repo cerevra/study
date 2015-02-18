@@ -7,20 +7,24 @@
 class Array
 {
 public:
+    Array() = delete;
     ~Array();
 
-    static Array fromString(const QString& str);
-    static Array fromArray (const QString& arr);
+    static Array* fromArray (const QString& arr);
+    static Array* fromString(const QString& str);
 
-    bool isValid() const;
-
-    QString printString() const;
-    QString printArray () const;
+    QString       printArray () const;
+    QString       printString() const;
 
 private:
-    Array();
+    typedef QVector<int> VectorOfInt;
 
-    bool m_isValid = false;
+    Array(const VectorOfInt& vec);
+
+    static bool addNumber(VectorOfInt& vec, const QStringRef& str);
+    static bool addRange (VectorOfInt& vec, const QStringRef& str);
+
+    VectorOfInt m_vec; // plain array is inside of it
 };
 
 #endif // ARRAY_H

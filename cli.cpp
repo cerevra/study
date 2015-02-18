@@ -1,6 +1,6 @@
 #include "cli.h"
 
-#include "array.h"
+#include <QScopedPointer>
 
 const QString CLI::m_illformedInput = "Wrong format of input data";
 
@@ -25,11 +25,11 @@ void CLI::run() {
 
         switch (m_qin.readLine().toInt()) {
         case 1:
-            printMsg(parseArray ()      );
+            processArray();
             break;
 
         case 2:
-            printMsg(parseString()      );
+            processString();
             break;
 
         case 3:
@@ -45,18 +45,33 @@ void CLI::run() {
     }
 }
 
-QString CLI::parseArray() {
-    Array arr = Array::fromArray(m_qin.readLine());
+void CLI::processArray()
+{
+    printMsg("Enter array like this: [1,3,4,5,7,9]").flush();
 
-    return arr.isValid() ? arr.printString() : m_illformedInput;
+    QScopedPointer<Array> array (Array::fromArray (m_qin.readLine()));
+
+    print(array.data());
 }
 
-QString CLI::parseString() {
-    Array arr = Array::fromString(m_qin.readLine());
+void CLI::processString()
+{
+    printMsg("Enter string like this: 1,3-5,7,9"   ).flush();
 
-    return arr.isValid() ? arr.printArray () : m_illformedInput;
+    QScopedPointer<Array> array (Array::fromString(m_qin.readLine()));
+
+    print(array.data());
 }
 
-void CLI::printMsg(const QString& msg) {
-    m_qout << msg << endl;
+QTextStream& CLI::printMsg(const QString& msg) {
+    return m_qout << msg << endl;
+}
+
+void CLI::print(const Array* arr)
+{
+    if (arr)
+        m_qout << "Array  format: " << arr->printArray () << endl
+               << "String format: " << arr->printString() << endl;
+    else
+        printMsg(m_illformedInput);
 }
