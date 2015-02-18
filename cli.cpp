@@ -54,7 +54,7 @@ void CLI::processArray()
 
 void CLI::processString()
 {
-    printMsg("Enter string like this: 1,3-5,7,9"   ).flush();
+    printMsg("Enter string like this: \"1,3-5,7,9\""   ).flush();
 
     QScopedPointer<Array> array (Array::fromString(m_qin.readLine()));
 

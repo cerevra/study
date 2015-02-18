@@ -34,7 +34,10 @@ Array* Array::fromArray(const QString& arr) {
 }
 
 Array* Array::fromString(const QString& str) {
-    QVector<QStringRef> nums = str.leftRef(str.size()).split(',');
+    if (!(str.startsWith('\"') && str.endsWith('\"')))
+        return nullptr;
+
+    QVector<QStringRef> nums = str.midRef(1, str.size() - 2).split(',');
     VectorOfInt vec;
 
     vec.reserve(nums.size());
@@ -59,10 +62,7 @@ Array* Array::fromString(const QString& str) {
 }
 
 QString Array::printArray() const {
-    QString str;
-
-    str.append('[');
-    str.append(QString::number(m_vec[0]));
+    QString str = QString("[%1").arg(m_vec[0]);
 
     for(int i = 1; i < m_vec.size(); ++i)
         str.append(QString(",%1").arg(m_vec[i]));
@@ -73,7 +73,7 @@ QString Array::printArray() const {
 }
 
 QString Array::printString() const {
-    QString str = QString::number(m_vec[0]);
+    QString str = QString("\"%1").arg(m_vec[0]);
 
     auto addDelimiter = [&str](char c) {
         if (!str.endsWith('-'))
@@ -97,6 +97,7 @@ QString Array::printString() const {
         addDelimiter(',');
         str.append(QString::number(m_vec.last()));
     }
+    str.append('\"');
 
     return str;
 }
