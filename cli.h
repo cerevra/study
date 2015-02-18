@@ -14,13 +14,11 @@ public:
     void run();
 
 private:
-    void         processArray ();
-    void         processString();
+    inline void         processArray ();
+    inline void         processString();
 
-    QTextStream& printMsg(const QString& msg);
-    void         print   (const Array*   arr);
-
-    static const QString m_illformedInput;
+    inline QTextStream& printMsg(const QString& msg);
+    inline void         print   (const Array*   arr);
 
     QTextStream m_qin ;
     QTextStream m_qout;

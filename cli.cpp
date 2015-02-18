@@ -2,8 +2,6 @@
 
 #include <QScopedPointer>
 
-const QString CLI::m_illformedInput = "Wrong format of input data";
-
 CLI::CLI()
     : m_qin (stdin )
     , m_qout(stdout)
@@ -73,5 +71,5 @@ void CLI::print(const Array* arr)
         m_qout << "Array  format: " << arr->printArray () << endl
                << "String format: " << arr->printString() << endl;
     else
-        printMsg(m_illformedInput);
+        printMsg("Wrong format of input data");
 }

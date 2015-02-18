@@ -21,8 +21,8 @@ private:
 
     Array(const VectorOfInt& vec);
 
-    static bool addNumber(VectorOfInt& vec, const QStringRef& str);
-    static bool addRange (VectorOfInt& vec, const QStringRef& str);
+    inline static bool addNumber(VectorOfInt& vec, const QStringRef& str);
+           static bool addRange (VectorOfInt& vec, const QStringRef& str);
 
     VectorOfInt m_vec; // plain array is inside of it
 };

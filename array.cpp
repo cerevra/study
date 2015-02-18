@@ -37,6 +37,7 @@ Array* Array::fromString(const QString& str) {
     QVector<QStringRef> nums = str.leftRef(str.size()).split(',');
     VectorOfInt vec;
 
+    vec.reserve(nums.size());
     for (int i = 0; i < nums.size(); ++i) {
         switch (nums[i].count('-')) {
         case 0:
