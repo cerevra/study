@@ -7,9 +7,20 @@
 class Array
 {
 public:
-    Array (const QString& str);
-    Array () = delete;
     ~Array();
+
+    static Array fromString(const QString& str);
+    static Array fromArray (const QString& arr);
+
+    bool isValid() const;
+
+    QString printString() const;
+    QString printArray () const;
+
+private:
+    Array();
+
+    bool m_isValid = false;
 };
 
 #endif // ARRAY_H

@@ -12,8 +12,8 @@ public:
     void run();
 
 private:
-    QString parseString();
     QString parseArray ();
+    QString parseString();
     void    printMsg   (const QString& msg);
 
     static const QString m_illformedInput;

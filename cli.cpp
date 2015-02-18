@@ -45,12 +45,16 @@ void CLI::run() {
     }
 }
 
-QString CLI::parseString() {
-    return "";
+QString CLI::parseArray() {
+    Array arr = Array::fromArray(m_qin.readLine());
+
+    return arr.isValid() ? arr.printString() : m_illformedInput;
 }
 
-QString CLI::parseArray() {
-    return "";
+QString CLI::parseString() {
+    Array arr = Array::fromString(m_qin.readLine());
+
+    return arr.isValid() ? arr.printArray () : m_illformedInput;
 }
 
 void CLI::printMsg(const QString& msg) {
