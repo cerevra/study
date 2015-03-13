@@ -1,7 +1,7 @@
 #ifndef COUNTNOTNULLS_H
 #define COUNTNOTNULLS_H
 
-short countNotNulls(int value){
+short countNotNulls(unsigned int value){
     int count = 0;
     while(value){
         if (value & 0x01)
